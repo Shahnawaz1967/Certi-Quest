@@ -7,7 +7,7 @@ const CategoryForm = ({ onCategoryAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/categories", {
+      await axios.post("https://certi-quest.onrender.com/api/categories", {
         category_name: categoryName,
       });
       setCategoryName(""); // Clear input after submitting

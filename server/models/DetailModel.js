@@ -10,12 +10,12 @@ const Detail = {
     return rows;
   },
 
-  create: async (certificate_title, questions, master_id) => { // Updated to use 'questions'
+  create: async (certificate_title, questions, master_id) => { 
     const [result] = await db.query(
-      "INSERT INTO Details (certificate_title, questions, master_id) VALUES (?, ?, ?)", // Updated column name
-      [certificate_title, questions, master_id] // Updated to 'questions'
+      "INSERT INTO Details (certificate_title, questions, master_id) VALUES (?, ?, ?)",
+      [certificate_title, questions, master_id] 
     );
-    return { id: result.insertId, certificate_title, questions, master_id }; // Updated to 'questions'
+    return { id: result.insertId, certificate_title, questions, master_id }; 
   },
 };
 

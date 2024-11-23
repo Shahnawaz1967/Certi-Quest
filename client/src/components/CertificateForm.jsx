@@ -4,7 +4,7 @@ import axios from "axios";
 const CertificateForm = ({ onCertificateAdded }) => {
   const [certificate, setCertificate] = useState({
     certificate_title: "",
-    questions: "", // Updated
+    questions: "", 
     master_id: "",
   });
 
@@ -15,7 +15,7 @@ const CertificateForm = ({ onCertificateAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/certificates", certificate);
+      await axios.post("https://certi-quest.onrender.com/api/certificates", certificate);
       setCertificate({ certificate_title: "", questions: "", master_id: "" }); // Updated
       onCertificateAdded();
     } catch (error) {
@@ -36,10 +36,10 @@ const CertificateForm = ({ onCertificateAdded }) => {
       />
       <input
         type="text"
-        name="questions" // Updated
-        value={certificate.questions} // Updated
+        name="questions" 
+        value={certificate.questions}
         onChange={handleChange}
-        placeholder="Questions" // Updated
+        placeholder="Questions" 
         className="border p-2 mr-2"
         required
       />

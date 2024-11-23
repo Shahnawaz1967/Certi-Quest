@@ -7,9 +7,11 @@ const CategoryForm = ({ onCategoryAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/categories", { category_name: categoryName });
-      setCategoryName("");
-      onCategoryAdded();
+      await axios.post("http://localhost:5000/api/categories", {
+        category_name: categoryName,
+      });
+      setCategoryName(""); // Clear input after submitting
+      onCategoryAdded(); // Refresh category list after adding
     } catch (error) {
       console.error("Error creating category:", error);
     }
@@ -22,10 +24,10 @@ const CategoryForm = ({ onCategoryAdded }) => {
         value={categoryName}
         onChange={(e) => setCategoryName(e.target.value)}
         placeholder="Enter category name"
-        className="border p-2 mr-2"
+        className="p-2 border border-gray-300 rounded-md"
         required
       />
-      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+      <button type="submit" className="ml-2 bg-blue-500 text-white p-2 rounded-md">
         Add Category
       </button>
     </form>

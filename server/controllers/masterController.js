@@ -1,22 +1,30 @@
-import Master from "../models/MasterModel.js";
+import db from "../config/db.js";
 
-// Fetch all categories
+// Get all categories (from Master table)
 export const getAllCategories = async (req, res) => {
   try {
-    const categories = await Master.getAll();
+    const [categories] = await db.query("SELECT * FROM Master");
     res.status(200).json(categories);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch categories", error });
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ error: "Error fetching categories." });
   }
 };
 
-// Create a new category
+// Create a new category (insert into Master table)
 export const createCategory = async (req, res) => {
+  const { category_name } = req.body;
+  if (!category_name) {
+    return res.status(400).json({ error: "Category name is required." });
+  }
   try {
-    const { category_name } = req.body;
-    const category = await Master.create(category_name);
-    res.status(201).json(category);
+    const [result] = await db.query(
+      "INSERT INTO Master (category_name) VALUES (?)",
+      [category_name]
+    );
+    res.status(201).json({ message: "Category created successfully.", id: result.insertId });
   } catch (error) {
-    res.status(500).json({ message: "Failed to create category", error });
+    console.error("Error creating category:", error);
+    res.status(500).json({ error: "Error creating category." });
   }
 };

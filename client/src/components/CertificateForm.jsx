@@ -4,7 +4,7 @@ import axios from "axios";
 const CertificateForm = ({ onCertificateAdded }) => {
   const [certificate, setCertificate] = useState({
     certificate_title: "",
-    certificate_description: "",
+    questions: "", // Updated
     master_id: "",
   });
 
@@ -16,7 +16,7 @@ const CertificateForm = ({ onCertificateAdded }) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/api/certificates", certificate);
-      setCertificate({ certificate_title: "", certificate_description: "", master_id: "" });
+      setCertificate({ certificate_title: "", questions: "", master_id: "" }); // Updated
       onCertificateAdded();
     } catch (error) {
       console.error("Error creating certificate:", error);
@@ -36,10 +36,10 @@ const CertificateForm = ({ onCertificateAdded }) => {
       />
       <input
         type="text"
-        name="certificate_description"
-        value={certificate.certificate_description}
+        name="questions" // Updated
+        value={certificate.questions} // Updated
         onChange={handleChange}
-        placeholder="Description"
+        placeholder="Questions" // Updated
         className="border p-2 mr-2"
         required
       />

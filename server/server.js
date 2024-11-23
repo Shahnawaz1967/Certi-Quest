@@ -1,11 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors"; // Import cors
 import masterRoutes from "./routes/masterRoutes.js";
 import detailRoutes from "./routes/detailRoutes.js";
 import db from "./config/db.js";
 
 dotenv.config();
 const app = express();
+
+// Middleware to enable CORS
+app.use(cors()); // Allow all origins by default
 
 // Middleware to parse JSON bodies
 app.use(express.json());
